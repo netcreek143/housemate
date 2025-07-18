@@ -1,646 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HouseMate - Expense Tracker & Bill Splitter</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="manifest" href="manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <meta name="theme-color" content="#667eea">
-    <meta name="description" content="HouseMate - Track expenses and split bills with your housemates">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <meta name="theme-color" content="#667eea" />
+    <meta
+      name="description"
+      content="HouseMate - Track expenses and split bills with your housemates"
+    />
+  </head>
+  <body>
     <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
+    <!--<div id="loading-screen" class="loading-screen">
         <div class="loading-animation">
             <div class="wave"></div>
             <div class="wave"></div>
             <div class="wave"></div>
         </div>
         <p>Loading HouseMate...</p>
-    </div>
-
+    </div>-->
     <!-- Authentication Container -->
     <div id="auth-container" class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <h1><i class="fas fa-home"></i> HouseMate</h1>
-                <p>Track expenses and split bills with your housemates</p>
-            </div>
-            
-            <!-- PIN Login Form -->
-            <form id="pin-form" class="auth-form">
-                <div class="pin-input-container">
-                    <label>Enter your 4-digit PIN</label>
-                    <div class="pin-inputs">
-                        <input type="password" class="pin-digit" maxlength="1" pattern="[0-9]">
-                        <input type="password" class="pin-digit" maxlength="1" pattern="[0-9]">
-                        <input type="password" class="pin-digit" maxlength="1" pattern="[0-9]">
-                        <input type="password" class="pin-digit" maxlength="1" pattern="[0-9]">
-                    </div>
-                    <div class="pin-error" id="pin-error"></div>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-unlock"></i> Login
-                </button>
-                <p class="auth-switch">
-                    <a href="#" id="show-register">New housemate? Join here</a>
-                </p>
-            </form>
-
-            <!-- Register Form -->
-            <form id="register-form" class="auth-form hidden">
-                <div class="form-group">
-                    <label for="register-name">Full Name</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="register-name" required>
-                        <i class="fas fa-user input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <div class="input-wrapper">
-                        <input type="email" id="register-email" required>
-                        <i class="fas fa-envelope input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="register-pin">Set 4-Digit PIN</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="register-pin" maxlength="4" pattern="[0-9]{4}" placeholder="Enter 4 digits" required>
-                        <i class="fas fa-lock input-icon"></i>
-                    </div>
-                    <small>This PIN will be used for all future logins</small>
-                </div>
-                <div class="form-group">
-                    <label for="register-room">Room/Apartment</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="register-room" placeholder="e.g., Room 101, Apt 2B" required>
-                        <i class="fas fa-door-open input-icon"></i>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-user-plus"></i> Join as Housemate
-                </button>
-                <p class="auth-switch">
-                    Already registered? <a href="#" id="show-login">Login here</a>
-                </p>
-            </form>
+      <div class="auth-card">
+        <div class="auth-header">
+          <h1><i class="fas fa-home"></i> HouseMate</h1>
+          <p>Track expenses and split bills with your housemates</p>
         </div>
+
+        <!-- PIN Login Form -->
+        <form id="pin-form" class="auth-form">
+          <div class="pin-input-container">
+            <label>Enter your 4-digit PIN</label>
+            <div class="pin-inputs">
+              <input
+                type="password"
+                class="pin-digit"
+                maxlength="1"
+                pattern="[0-9]"
+              />
+              <input
+                type="password"
+                class="pin-digit"
+                maxlength="1"
+                pattern="[0-9]"
+              />
+              <input
+                type="password"
+                class="pin-digit"
+                maxlength="1"
+                pattern="[0-9]"
+              />
+              <input
+                type="password"
+                class="pin-digit"
+                maxlength="1"
+                pattern="[0-9]"
+              />
+            </div>
+            <div class="pin-error" id="pin-error"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-unlock"></i> Login
+          </button>
+          <p class="auth-switch">
+            <a href="#" id="show-register">New housemate? Join here</a>
+          </p>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="auth-form hidden">
+          <div class="form-group">
+            <label for="register-name">Full Name</label>
+            <div class="input-wrapper">
+              <input type="text" id="register-name" required />
+              <i class="fas fa-user input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email</label>
+            <div class="input-wrapper">
+              <input type="email" id="register-email" required />
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="register-pin">Set 4-Digit PIN</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="register-pin"
+                maxlength="4"
+                pattern="[0-9]{4}"
+                placeholder="Enter 4 digits"
+                required
+              />
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+            <small>This PIN will be used for all future logins</small>
+          </div>
+          <div class="form-group">
+            <label for="register-room">Room/Apartment</label>
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="register-room"
+                placeholder="e.g., Room 101, Apt 2B"
+                required
+              />
+              <i class="fas fa-door-open input-icon"></i>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-user-plus"></i> Join as Housemate
+          </button>
+          <p class="auth-switch">
+            Already registered? <a href="#" id="show-login">Login here</a>
+          </p>
+        </form>
+      </div>
     </div>
 
     <!-- Main Application -->
     <div id="app-container" class="app-container hidden">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="header-left">
-                    <h1><i class="fas fa-home"></i> HouseMate</h1>
-                    <span class="user-info" id="current-user-info"></span>
-                </div>
-                <div class="header-actions">
-                    <button id="theme-toggle" class="btn btn-icon" aria-label="Toggle theme">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button id="profile-btn" class="btn btn-icon" aria-label="Profile">
-                        <i class="fas fa-user"></i>
-                    </button>
-                    <button id="logout-btn" class="btn btn-icon" aria-label="Logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                </div>
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="header-left">
+            <h1><i class="fas fa-home"></i> HouseMate</h1>
+            <span class="user-info" id="current-user-info"></span>
+          </div>
+          <div class="header-actions">
+            <button
+              id="theme-toggle"
+              class="btn btn-icon"
+              aria-label="Toggle theme"
+            >
+              <i class="fas fa-moon"></i>
+            </button>
+            <button id="profile-btn" class="btn btn-icon" aria-label="Profile">
+              <i class="fas fa-user"></i>
+            </button>
+            <button id="logout-btn" class="btn btn-icon" aria-label="Logout">
+              <i class="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Navigation -->
+      <nav class="nav">
+        <div class="nav-content">
+          <button class="nav-item active" data-tab="dashboard">
+            <i class="fas fa-chart-pie"></i>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-tab="expenses">
+            <i class="fas fa-receipt"></i>
+            <span>My Expenses</span>
+          </button>
+          <button class="nav-item" data-tab="bills">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Split Bills</span>
+          </button>
+          <button class="nav-item" data-tab="budget">
+            <i class="fas fa-piggy-bank"></i>
+            <span>My Budget</span>
+          </button>
+          <button class="nav-item" data-tab="reports">
+            <i class="fas fa-chart-bar"></i>
+            <span>House Reports</span>
+          </button>
+          <button class="nav-item" data-tab="balances">
+            <i class="fas fa-balance-scale"></i>
+            <span>Balances</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Dashboard Tab -->
+        <div id="dashboard-tab" class="tab-content active">
+          <div class="dashboard-header">
+            <h2>Dashboard</h2>
+            <div class="quick-actions">
+              <button id="quick-add-expense" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Expense
+              </button>
+              <button id="quick-split-bill" class="btn btn-secondary">
+                <i class="fas fa-share-alt"></i> Split Bill
+              </button>
             </div>
-        </header>
+          </div>
 
-        <!-- Navigation -->
-        <nav class="nav">
-            <div class="nav-content">
-                <button class="nav-item active" data-tab="dashboard">
-                    <i class="fas fa-chart-pie"></i>
-                    <span>Dashboard</span>
-                </button>
-                <button class="nav-item" data-tab="expenses">
-                    <i class="fas fa-receipt"></i>
-                    <span>My Expenses</span>
-                </button>
-                <button class="nav-item" data-tab="bills">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Split Bills</span>
-                </button>
-                <button class="nav-item" data-tab="budget">
-                    <i class="fas fa-piggy-bank"></i>
-                    <span>My Budget</span>
-                </button>
-                <button class="nav-item" data-tab="reports">
-                    <i class="fas fa-chart-bar"></i>
-                    <span>House Reports</span>
-                </button>
-                <button class="nav-item" data-tab="balances">
-                    <i class="fas fa-balance-scale"></i>
-                    <span>Balances</span>
-                </button>
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-wallet"></i>
+              </div>
+              <div class="stat-content">
+                <h3 id="my-total-expenses">₹0</h3>
+                <p>My Total Expenses</p>
+              </div>
             </div>
-        </nav>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-calendar-month"></i>
+              </div>
+              <div class="stat-content">
+                <h3 id="my-monthly-expenses">₹0</h3>
+                <p>This Month</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-content">
+                <h3 id="shared-expenses">₹0</h3>
+                <p>Shared Expenses</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fas fa-exchange-alt"></i>
+              </div>
+              <div class="stat-content">
+                <h3 id="net-balance">₹0</h3>
+                <p>Net Balance</p>
+              </div>
+            </div>
+          </div>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Dashboard Tab -->
-            <div id="dashboard-tab" class="tab-content active">
-                <div class="dashboard-header">
-                    <h2>Dashboard</h2>
-                    <div class="quick-actions">
-                        <button id="quick-add-expense" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Add Expense
-                        </button>
-                        <button id="quick-split-bill" class="btn btn-secondary">
-                            <i class="fas fa-share-alt"></i> Split Bill
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="dashboard-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 id="my-total-expenses">₹0</h3>
-                            <p>My Total Expenses</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-calendar-month"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 id="my-monthly-expenses">₹0</h3>
-                            <p>This Month</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 id="shared-expenses">₹0</h3>
-                            <p>Shared Expenses</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <div class="stat-content">
-                            <h3 id="net-balance">₹0</h3>
-                            <p>Net Balance</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="dashboard-content">
-                    <div class="dashboard-section">
-                        <h3>Recent Activity</h3>
-                        <div id="recent-activity" class="activity-list"></div>
-                    </div>
-                    
-                    <div class="dashboard-section">
-                        <h3>Outstanding Balances</h3>
-                        <div id="outstanding-balances" class="balance-list"></div>
-                    </div>
-                </div>
+          <div class="dashboard-content">
+            <div class="dashboard-section">
+              <h3>Recent Activity</h3>
+              <div id="recent-activity" class="activity-list"></div>
             </div>
 
-            <!-- My Expenses Tab -->
-            <div id="expenses-tab" class="tab-content">
-                <div class="expenses-header">
-                    <h2>My Expenses</h2>
-                    <button id="add-expense-btn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Add Expense
-                    </button>
-                </div>
+            <div class="dashboard-section">
+              <h3>Outstanding Balances</h3>
+              <div id="outstanding-balances" class="balance-list"></div>
+            </div>
+          </div>
+        </div>
 
-                <div class="expenses-filters">
-                    <div class="filter-group">
-                        <div class="search-input-wrapper">
-                            <input type="text" id="expense-search" placeholder="Search expenses...">
-                            <i class="fas fa-search search-icon"></i>
-                        </div>
-                        <div class="select-wrapper">
-                            <select id="category-filter">
-                                <option value="">All Categories</option>
-                                <option value="groceries">Groceries</option>
-                                <option value="utilities">Utilities</option>
-                                <option value="rent">Rent</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="transport">Transport</option>
-                                <option value="household">Household Items</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <i class="fas fa-chevron-down select-icon"></i>
-                        </div>
-                        <div class="date-input-wrapper">
-                            <input type="date" id="date-from">
-                            <i class="fas fa-calendar-alt date-icon"></i>
-                            <label class="date-label">From</label>
-                        </div>
-                        <div class="date-input-wrapper">
-                            <input type="date" id="date-to">
-                            <i class="fas fa-calendar-alt date-icon"></i>
-                            <label class="date-label">To</label>
-                        </div>
-                    </div>
-                </div>
+        <!-- My Expenses Tab -->
+        <div id="expenses-tab" class="tab-content">
+          <div class="expenses-header">
+            <h2>My Expenses</h2>
+            <button id="add-expense-btn" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Add Expense
+            </button>
+          </div>
 
-                <div id="my-expenses-list" class="expense-list"></div>
+          <div class="expenses-filters">
+            <div class="filter-group">
+              <div class="search-input-wrapper">
+                <input
+                  type="text"
+                  id="expense-search"
+                  placeholder="Search expenses..."
+                />
+                <i class="fas fa-search search-icon"></i>
+              </div>
+              <div class="select-wrapper">
+                <select id="category-filter">
+                  <option value="">All Categories</option>
+                  <option value="groceries">Groceries</option>
+                  <option value="utilities">Utilities</option>
+                  <option value="rent">Rent</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="transport">Transport</option>
+                  <option value="household">Household Items</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+              <div class="date-input-wrapper">
+                <input type="date" id="date-from" />
+                <i class="fas fa-calendar-alt date-icon"></i>
+                <label class="date-label">From</label>
+              </div>
+              <div class="date-input-wrapper">
+                <input type="date" id="date-to" />
+                <i class="fas fa-calendar-alt date-icon"></i>
+                <label class="date-label">To</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="my-expenses-list" class="expense-list"></div>
+        </div>
+
+        <!-- Split Bills Tab -->
+        <div id="bills-tab" class="tab-content">
+          <div class="bills-header">
+            <h2>Split Bills</h2>
+            <button id="add-bill-btn" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Split New Bill
+            </button>
+          </div>
+
+          <div class="bills-filters">
+            <div class="filter-group">
+              <div class="select-wrapper">
+                <select id="bill-status-filter">
+                  <option value="">All Bills</option>
+                  <option value="pending">Pending</option>
+                  <option value="partial">Partially Paid</option>
+                  <option value="settled">Settled</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+              <div class="select-wrapper">
+                <select id="bill-category-filter">
+                  <option value="">All Categories</option>
+                  <option value="groceries">Groceries</option>
+                  <option value="utilities">Utilities</option>
+                  <option value="rent">Rent</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="household">Household Items</option>
+                  <option value="other">Other</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+            </div>
+          </div>
+
+          <div id="split-bills-list" class="bills-list"></div>
+        </div>
+
+        <!-- My Budget Tab -->
+        <div id="budget-tab" class="tab-content">
+          <div class="budget-header">
+            <h2>My Budget</h2>
+            <button id="set-budget-btn" class="btn btn-primary">
+              <i class="fas fa-plus"></i> Set Budget
+            </button>
+          </div>
+
+          <div id="budget-overview" class="budget-overview">
+            <div class="budget-card">
+              <div class="budget-info">
+                <h3>Monthly Budget</h3>
+                <p id="total-budget-amount">₹0</p>
+                <p id="budget-remaining">₹0 remaining</p>
+              </div>
+              <div class="budget-progress">
+                <div class="progress-bar">
+                  <div id="budget-progress-fill" class="progress-fill"></div>
+                </div>
+                <span id="budget-percentage">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="category-budgets" class="category-budgets">
+            <h3>Category Budgets</h3>
+            <div id="category-budget-list"></div>
+          </div>
+        </div>
+
+        <!-- House Reports Tab -->
+        <div id="reports-tab" class="tab-content">
+          <div class="reports-header">
+            <h2>House Reports</h2>
+            <div class="export-buttons">
+              <button id="export-csv" class="btn btn-secondary">
+                <i class="fas fa-file-csv"></i> Export CSV
+              </button>
+            </div>
+          </div>
+
+          <div class="reports-filters">
+            <div class="filter-group">
+              <div class="select-wrapper">
+                <select id="report-period">
+                  <option value="month">This Month</option>
+                  <option value="quarter">This Quarter</option>
+                  <option value="year">This Year</option>
+                  <option value="custom">Custom Range</option>
+                </select>
+                <i class="fas fa-chevron-down select-icon"></i>
+              </div>
+              <div class="date-input-wrapper hidden" id="report-from-wrapper">
+                <input type="date" id="report-from" />
+                <i class="fas fa-calendar-alt date-icon"></i>
+                <label class="date-label">From</label>
+              </div>
+              <div class="date-input-wrapper hidden" id="report-to-wrapper">
+                <input type="date" id="report-to" />
+                <i class="fas fa-calendar-alt date-icon"></i>
+                <label class="date-label">To</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="reports-content">
+            <div class="report-section">
+              <h3>House Summary</h3>
+              <div id="house-summary" class="summary-grid"></div>
             </div>
 
-            <!-- Split Bills Tab -->
-            <div id="bills-tab" class="tab-content">
-                <div class="bills-header">
-                    <h2>Split Bills</h2>
-                    <button id="add-bill-btn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Split New Bill
-                    </button>
-                </div>
-
-                <div class="bills-filters">
-                    <div class="filter-group">
-                        <div class="select-wrapper">
-                            <select id="bill-status-filter">
-                                <option value="">All Bills</option>
-                                <option value="pending">Pending</option>
-                                <option value="partial">Partially Paid</option>
-                                <option value="settled">Settled</option>
-                            </select>
-                            <i class="fas fa-chevron-down select-icon"></i>
-                        </div>
-                        <div class="select-wrapper">
-                            <select id="bill-category-filter">
-                                <option value="">All Categories</option>
-                                <option value="groceries">Groceries</option>
-                                <option value="utilities">Utilities</option>
-                                <option value="rent">Rent</option>
-                                <option value="entertainment">Entertainment</option>
-                                <option value="household">Household Items</option>
-                                <option value="other">Other</option>
-                            </select>
-                            <i class="fas fa-chevron-down select-icon"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="split-bills-list" class="bills-list"></div>
+            <div class="report-section">
+              <h3>Individual Contributions</h3>
+              <div
+                id="individual-contributions"
+                class="contributions-list"
+              ></div>
             </div>
 
-            <!-- My Budget Tab -->
-            <div id="budget-tab" class="tab-content">
-                <div class="budget-header">
-                    <h2>My Budget</h2>
-                    <button id="set-budget-btn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Set Budget
-                    </button>
-                </div>
-
-                <div id="budget-overview" class="budget-overview">
-                    <div class="budget-card">
-                        <div class="budget-info">
-                            <h3>Monthly Budget</h3>
-                            <p id="total-budget-amount">₹0</p>
-                            <p id="budget-remaining">₹0 remaining</p>
-                        </div>
-                        <div class="budget-progress">
-                            <div class="progress-bar">
-                                <div id="budget-progress-fill" class="progress-fill"></div>
-                            </div>
-                            <span id="budget-percentage">0%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="category-budgets" class="category-budgets">
-                    <h3>Category Budgets</h3>
-                    <div id="category-budget-list"></div>
-                </div>
+            <div class="report-section">
+              <h3>Category Breakdown</h3>
+              <canvas id="reports-chart" width="400" height="200"></canvas>
             </div>
+          </div>
+        </div>
 
-            <!-- House Reports Tab -->
-            <div id="reports-tab" class="tab-content">
-                <div class="reports-header">
-                    <h2>House Reports</h2>
-                    <div class="export-buttons">
-                        <button id="export-csv" class="btn btn-secondary">
-                            <i class="fas fa-file-csv"></i> Export CSV
-                        </button>
-                    </div>
-                </div>
+        <!-- Balances Tab -->
+        <div id="balances-tab" class="tab-content">
+          <div class="balances-header">
+            <h2>Who Owes Whom</h2>
+            <button id="settle-all-btn" class="btn btn-secondary">
+              <i class="fas fa-handshake"></i> Settle All
+            </button>
+          </div>
 
-                <div class="reports-filters">
-                    <div class="filter-group">
-                        <div class="select-wrapper">
-                            <select id="report-period">
-                                <option value="month">This Month</option>
-                                <option value="quarter">This Quarter</option>
-                                <option value="year">This Year</option>
-                                <option value="custom">Custom Range</option>
-                            </select>
-                            <i class="fas fa-chevron-down select-icon"></i>
-                        </div>
-                        <div class="date-input-wrapper hidden" id="report-from-wrapper">
-                            <input type="date" id="report-from">
-                            <i class="fas fa-calendar-alt date-icon"></i>
-                            <label class="date-label">From</label>
-                        </div>
-                        <div class="date-input-wrapper hidden" id="report-to-wrapper">
-                            <input type="date" id="report-to">
-                            <i class="fas fa-calendar-alt date-icon"></i>
-                            <label class="date-label">To</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reports-content">
-                    <div class="report-section">
-                        <h3>House Summary</h3>
-                        <div id="house-summary" class="summary-grid"></div>
-                    </div>
-                    
-                    <div class="report-section">
-                        <h3>Individual Contributions</h3>
-                        <div id="individual-contributions" class="contributions-list"></div>
-                    </div>
-
-                    <div class="report-section">
-                        <h3>Category Breakdown</h3>
-                        <canvas id="reports-chart" width="400" height="200"></canvas>
-                    </div>
-                </div>
+          <div class="balances-summary">
+            <div class="balance-stat">
+              <h3 id="total-owed-to-me">₹0</h3>
+              <p>Owed to Me</p>
             </div>
-
-            <!-- Balances Tab -->
-            <div id="balances-tab" class="tab-content">
-                <div class="balances-header">
-                    <h2>Who Owes Whom</h2>
-                    <button id="settle-all-btn" class="btn btn-secondary">
-                        <i class="fas fa-handshake"></i> Settle All
-                    </button>
-                </div>
-
-                <div class="balances-summary">
-                    <div class="balance-stat">
-                        <h3 id="total-owed-to-me">₹0</h3>
-                        <p>Owed to Me</p>
-                    </div>
-                    <div class="balance-stat">
-                        <h3 id="total-i-owe">₹0</h3>
-                        <p>I Owe</p>
-                    </div>
-                    <div class="balance-stat">
-                        <h3 id="net-balance-amount">₹0</h3>
-                        <p>Net Balance</p>
-                    </div>
-                </div>
-
-                <div id="detailed-balances" class="detailed-balances"></div>
+            <div class="balance-stat">
+              <h3 id="total-i-owe">₹0</h3>
+              <p>I Owe</p>
             </div>
-        </main>
+            <div class="balance-stat">
+              <h3 id="net-balance-amount">₹0</h3>
+              <p>Net Balance</p>
+            </div>
+          </div>
+
+          <div id="detailed-balances" class="detailed-balances"></div>
+        </div>
+      </main>
     </div>
 
     <!-- Modals -->
     <!-- Add Expense Modal -->
     <div id="expense-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="expense-modal-title">Add Expense</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="expense-form">
-                <div class="form-group">
-                    <label for="expense-description">Description</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="expense-description" required>
-                        <i class="fas fa-edit input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="expense-amount">Amount (₹)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="expense-amount" step="0.01" required>
-                        <i class="fas fa-rupee-sign input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="expense-category">Category</label>
-                    <div class="select-wrapper">
-                        <select id="expense-category" required>
-                            <option value="">Select Category</option>
-                            <option value="groceries">Groceries</option>
-                            <option value="utilities">Utilities</option>
-                            <option value="rent">Rent</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="transport">Transport</option>
-                            <option value="household">Household Items</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <i class="fas fa-chevron-down select-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="expense-date">Date</label>
-                    <div class="date-input-wrapper">
-                        <input type="date" id="expense-date" required>
-                        <i class="fas fa-calendar-alt date-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="expense-receipt">Receipt (optional)</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="expense-receipt" accept="image/*">
-                        <div class="file-input-display">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <span>Choose receipt image</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary modal-close">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Expense</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="expense-modal-title">Add Expense</h3>
+          <button class="modal-close">&times;</button>
         </div>
+        <form id="expense-form">
+          <div class="form-group">
+            <label for="expense-description">Description</label>
+            <div class="input-wrapper">
+              <input type="text" id="expense-description" required />
+              <i class="fas fa-edit input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expense-amount">Amount (₹)</label>
+            <div class="input-wrapper">
+              <input type="number" id="expense-amount" step="0.01" required />
+              <i class="fas fa-rupee-sign input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expense-category">Category</label>
+            <div class="select-wrapper">
+              <select id="expense-category" required>
+                <option value="">Select Category</option>
+                <option value="groceries">Groceries</option>
+                <option value="utilities">Utilities</option>
+                <option value="rent">Rent</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="transport">Transport</option>
+                <option value="household">Household Items</option>
+                <option value="other">Other</option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expense-date">Date</label>
+            <div class="date-input-wrapper">
+              <input type="date" id="expense-date" required />
+              <i class="fas fa-calendar-alt date-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expense-receipt">Receipt (optional)</label>
+            <div class="file-input-wrapper">
+              <input type="file" id="expense-receipt" accept="image/*" />
+              <div class="file-input-display">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Choose receipt image</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary modal-close">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Save Expense</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Split Bill Modal -->
     <div id="bill-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="bill-modal-title">Split New Bill</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="bill-form">
-                <div class="form-group">
-                    <label for="bill-description">Description</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="bill-description" required>
-                        <i class="fas fa-edit input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="bill-amount">Total Amount (₹)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="bill-amount" step="0.01" required>
-                        <i class="fas fa-rupee-sign input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="bill-category">Category</label>
-                    <div class="select-wrapper">
-                        <select id="bill-category" required>
-                            <option value="">Select Category</option>
-                            <option value="groceries">Groceries</option>
-                            <option value="utilities">Utilities</option>
-                            <option value="rent">Rent</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="household">Household Items</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <i class="fas fa-chevron-down select-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="bill-date">Date</label>
-                    <div class="date-input-wrapper">
-                        <input type="date" id="bill-date" required>
-                        <i class="fas fa-calendar-alt date-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Split with Housemates</label>
-                    <div id="housemate-selection" class="housemate-selection"></div>
-                </div>
-                <div class="form-group">
-                    <label>Split Method</label>
-                    <div class="split-method-options">
-                        <label class="radio-option">
-                            <input type="radio" name="split-method" value="equal" checked>
-                            <span class="radio-custom"></span>
-                            Equal Split
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="split-method" value="custom">
-                            <span class="radio-custom"></span>
-                            Custom Amounts
-                        </label>
-                    </div>
-                </div>
-                <div id="custom-split-amounts" class="custom-split-amounts hidden"></div>
-                <div class="form-group">
-                    <label for="bill-receipt">Receipt (optional)</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="bill-receipt" accept="image/*">
-                        <div class="file-input-display">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <span>Choose receipt image</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary modal-close">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Split Bill</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="bill-modal-title">Split New Bill</h3>
+          <button class="modal-close">&times;</button>
         </div>
+        <form id="bill-form">
+          <div class="form-group">
+            <label for="bill-description">Description</label>
+            <div class="input-wrapper">
+              <input type="text" id="bill-description" required />
+              <i class="fas fa-edit input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bill-amount">Total Amount (₹)</label>
+            <div class="input-wrapper">
+              <input type="number" id="bill-amount" step="0.01" required />
+              <i class="fas fa-rupee-sign input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bill-category">Category</label>
+            <div class="select-wrapper">
+              <select id="bill-category" required>
+                <option value="">Select Category</option>
+                <option value="groceries">Groceries</option>
+                <option value="utilities">Utilities</option>
+                <option value="rent">Rent</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="household">Household Items</option>
+                <option value="other">Other</option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bill-date">Date</label>
+            <div class="date-input-wrapper">
+              <input type="date" id="bill-date" required />
+              <i class="fas fa-calendar-alt date-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Split with Housemates</label>
+            <div id="housemate-selection" class="housemate-selection"></div>
+          </div>
+          <div class="form-group">
+            <label>Split Method</label>
+            <div class="split-method-options">
+              <label class="radio-option">
+                <input type="radio" name="split-method" value="equal" checked />
+                <span class="radio-custom"></span>
+                Equal Split
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="split-method" value="custom" />
+                <span class="radio-custom"></span>
+                Custom Amounts
+              </label>
+            </div>
+          </div>
+          <div
+            id="custom-split-amounts"
+            class="custom-split-amounts hidden"
+          ></div>
+          <div class="form-group">
+            <label for="bill-receipt">Receipt (optional)</label>
+            <div class="file-input-wrapper">
+              <input type="file" id="bill-receipt" accept="image/*" />
+              <div class="file-input-display">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Choose receipt image</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary modal-close">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Split Bill</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Budget Modal -->
     <div id="budget-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Set Budget</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="budget-form">
-                <div class="form-group">
-                    <label for="budget-category-input">Category</label>
-                    <div class="select-wrapper">
-                        <select id="budget-category-input" required>
-                            <option value="">Select Category</option>
-                            <option value="overall">Overall Budget</option>
-                            <option value="groceries">Groceries</option>
-                            <option value="utilities">Utilities</option>
-                            <option value="rent">Rent</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="transport">Transport</option>
-                            <option value="household">Household Items</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <i class="fas fa-chevron-down select-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="budget-amount-input">Monthly Budget Amount (₹)</label>
-                    <div class="input-wrapper">
-                        <input type="number" id="budget-amount-input" step="0.01" required>
-                        <i class="fas fa-rupee-sign input-icon"></i>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary modal-close">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Set Budget</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Set Budget</h3>
+          <button class="modal-close">&times;</button>
         </div>
+        <form id="budget-form">
+          <div class="form-group">
+            <label for="budget-category-input">Category</label>
+            <div class="select-wrapper">
+              <select id="budget-category-input" required>
+                <option value="">Select Category</option>
+                <option value="overall">Overall Budget</option>
+                <option value="groceries">Groceries</option>
+                <option value="utilities">Utilities</option>
+                <option value="rent">Rent</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="transport">Transport</option>
+                <option value="household">Household Items</option>
+                <option value="other">Other</option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="budget-amount-input">Monthly Budget Amount (₹)</label>
+            <div class="input-wrapper">
+              <input
+                type="number"
+                id="budget-amount-input"
+                step="0.01"
+                required
+              />
+              <i class="fas fa-rupee-sign input-icon"></i>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary modal-close">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Set Budget</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Profile Modal -->
     <div id="profile-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Profile Settings</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <form id="profile-form">
-                <div class="form-group">
-                    <label for="profile-name">Full Name</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="profile-name" required>
-                        <i class="fas fa-user input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="profile-email">Email</label>
-                    <div class="input-wrapper">
-                        <input type="email" id="profile-email" required>
-                        <i class="fas fa-envelope input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="profile-room">Room/Apartment</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="profile-room" required>
-                        <i class="fas fa-door-open input-icon"></i>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="profile-pin">Change PIN</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="profile-pin" maxlength="4" pattern="[0-9]{4}" placeholder="Enter new 4-digit PIN">
-                        <i class="fas fa-lock input-icon"></i>
-                    </div>
-                    <small>Leave empty to keep current PIN</small>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn btn-secondary modal-close">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </div>
-            </form>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Profile Settings</h3>
+          <button class="modal-close">&times;</button>
         </div>
+        <form id="profile-form">
+          <div class="form-group">
+            <label for="profile-name">Full Name</label>
+            <div class="input-wrapper">
+              <input type="text" id="profile-name" required />
+              <i class="fas fa-user input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profile-email">Email</label>
+            <div class="input-wrapper">
+              <input type="email" id="profile-email" required />
+              <i class="fas fa-envelope input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profile-room">Room/Apartment</label>
+            <div class="input-wrapper">
+              <input type="text" id="profile-room" required />
+              <i class="fas fa-door-open input-icon"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="profile-pin">Change PIN</label>
+            <div class="input-wrapper">
+              <input
+                type="password"
+                id="profile-pin"
+                maxlength="4"
+                pattern="[0-9]{4}"
+                placeholder="Enter new 4-digit PIN"
+              />
+              <i class="fas fa-lock input-icon"></i>
+            </div>
+            <small>Leave empty to keep current PIN</small>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-secondary modal-close">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Toast Notifications -->
     <div id="toast-container" class="toast-container"></div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
